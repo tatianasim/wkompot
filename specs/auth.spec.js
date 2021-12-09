@@ -42,4 +42,5 @@ describe('Auth', function () {
         await LoginPage.inputPassword.smartClear();
         await expect(LoginPage.passwordError).toHaveText('Required');
     });
+
 });
