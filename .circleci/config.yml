@@ -10,7 +10,10 @@ jobs:
       - image: circleci/node:latest-browsers
     steps:
       - checkout
-      - node/install-packages
+      - run:
+          name: Install deoendencies
+          command: |
+            npm i
       - run:
           name: Run tests
           command: |
