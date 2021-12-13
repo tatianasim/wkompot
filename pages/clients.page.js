@@ -1,20 +1,21 @@
 import AppPage from './app.page';
-import ClientComponent from "../components/client.component";
+import ClientComponent from '../components/client.component';
 
 class ClientsPage extends AppPage {
     clientCreation = ClientComponent;
 
-    get createClient() { return $('//button[span[.="Create Client"]]')}
+    get createClient() { return $('//button[span[.="Create Client"]]') }
 
     async deleteClient(email) {
-        await browser.execute((addr)=> {
-           client.$x(`//tr[.//a[.="${addr}"]]//span[contains(@class, "ant-dropdown-trigger")]/img`).click();
-        }, email);
-
-        // const options = $(`//tr[.//a[.="${email}"]]//span[contains(@class, "ant-dropdown-trigger")]/img`);
-        // await options.click();
-        const itemDelete = $('//span[f@class="ant-dropdown-menu-title-content"][.="Delete"]');
+        const options = $(`//tr[.//a[.="${email}"]]//span[contains(@class, "ant-dropdown-trigger")]`);
+        await options.waitForClickable();
+        await options.click();
+        const itemDelete = $('//span[@class="ant-dropdown-menu-title-content"][.="Delete"]');
+        await itemDelete.waitForClickable();
         await itemDelete.click();
+        const buttonConfirm = $('//button[contains(@class, "ant-btn-dangerous")][span[.="OK"]]');
+        await buttonConfirm.waitForClickable();
+        await buttonConfirm.click();
     }
 
     async getItemByEmail(email) {
