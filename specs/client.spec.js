@@ -6,12 +6,13 @@ import faker from 'faker';
 describe('Client', function() {
     let email;
 
-    before(async function () {
+    before(async function() {
         await LoginPage.open();
         await LoginPage.login(process.env.LOGIN, process.env.PASSWORD);
         await ProfilePage.navbar.clients.click();
         email = faker.internet.email();
     });
+
     it('creation', async function () {
         await ClientsPage.createClient.click();
         await expect(ClientsPage.clientCreation.buttonSave).toBeDisabled();
@@ -23,7 +24,7 @@ describe('Client', function() {
         await expect(ClientsPage.getItemByEmail(email)).toBeDisplayed();
     });
 
-    it.skip('deletion', async function() {
+    it('deletion', async function() {
         await ClientsPage.deleteClient(email);
         await expect(ClientsPage.getItemByEmail(email)).not.toBeExisting();
     });
