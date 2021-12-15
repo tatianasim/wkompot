@@ -1,10 +1,10 @@
 import AppPage from './app.page';
-import ClientComponent from "../components/client.component";
+import ClientComponent from '../components/client.component';
 
 class ClientsPage extends AppPage {
     clientCreation = ClientComponent;
 
-    get createClient() { return $('//button[span[.="Create Client"]]')}
+    get createClient() { return $('//button[span[.="Create Client"]]') }
 
     async deleteClient(email) {
         const options = $(`//tr[.//a[.="${email}"]]//span[contains(@class, "ant-dropdown-trigger")]`);
